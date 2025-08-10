@@ -15,7 +15,19 @@ export const getContestData = async (req, res) => {
         // limit: 5
       }
     });
-    res.json(response.data.objects);
+
+    const contests = response.data.objects;
+
+    const simplifiedObjects = contests.map(contest=>({
+      id: contest.id,
+      event: contest.event,
+      platform: contest.resource,
+      start: contest.start,
+      href: contest.href,
+    }));
+
+    //convert the array to string to send to the frontend so we need to parse this in the frontend side to be able to map over it.
+    res.json(simplifiedObjects);
   } catch (error) {
     console.error("Error fetching contest:", error.response?.data || error.message);
     res.status(500).json({ error: error.message });
