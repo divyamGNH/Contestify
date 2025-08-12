@@ -4,104 +4,89 @@ import Select from "react-select";
 
 export default function ContestFilter() {
   const [contests, setContests] = useState([]); // All contests from API
-  const [platforms, setPlatforms] = useState([]); // All unique platforms extracted
-  const [selectedPlatforms, setSelectedPlatforms] = useState([]); // Selected platform options
-  const [searchTerm, setSearchTerm] = useState(""); // Search input by user
+  const [platformOptions, setPlatformOptions] = useState([]); // React Select options
+  const [selectedPlatforms, setSelectedPlatforms] = useState([]); // Platforms for filtering
 
-  // Fetch contests data from backend API on mount
+  // Fetch data from backend API
   useEffect(() => {
-    axios.get("http://localhost:3000/api/getContestData") // your backend API endpoint
+    axios
+      .get("http://localhost:3000/api/getPlatformData")
       .then((res) => {
-
-        // console.log(res.data);
-        // console.log("res.data type is ", typeof res.data);
-
         const data = res.data;
-        console.log(data);
+        console.log("API Data:", data);
 
         setContests(data);
 
-        // Extract unique platforms from contest data.
-        const uniquePlatforms = [...new Set(data.map((c) => c.platform))];
+        // Build options from "name"
+        const options = data.map((item) => ({
+          label: item.name,
+          value: item.name,
+        }));
 
-        // Format for react-select options [{label, value}]
-        setPlatforms(uniquePlatforms.map((p) => ({ label: p, value: p })));
+        // Remove duplicates
+        const uniqueOptions = Array.from(
+          new Map(options.map((opt) => [opt.value, opt])).values()
+        );
 
-        // Optional: select all platforms by default
-        console.log("Available Platforms:", uniquePlatforms);
+        setPlatformOptions(uniqueOptions);
 
-        // setSelectedPlatforms(
-        //   uniquePlatforms.map((p) => ({ label: p, value: p }))
-        // );
+        // ✅ Select all platforms internally for filtering
+        // setSelectedPlatforms(uniqueOptions);
       })
       .catch((err) => {
         console.error("Error fetching contests:", err);
       });
   }, []);
 
-  // Handle platform toggle (react-select onChange)
+  // Handle when user selects from dropdown
   const handlePlatformChange = (selectedOptions) => {
+    // If nothing selected, set to [] so no contests are shown
     setSelectedPlatforms(selectedOptions || []);
   };
 
-  // Filter contests by selected platforms and search term
-  const filteredContests = contests.filter((contest) => {
-    const matchesPlatform =
-      selectedPlatforms.length === 0 ||
-      selectedPlatforms.some((p) => p.value === contest.platform);
-    const matchesSearch = contest.event
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    return matchesPlatform && matchesSearch;
-  });
+  // Filtering logic
+  const filteredContests =
+    selectedPlatforms.length === 0
+      ? []
+      : contests.filter((contest) =>
+          selectedPlatforms.some((p) => p.value === contest.name)
+        );
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4">Upcoming Contests</h1>
-
-      {/* Search Input */}
-      <input
-        type="text"
-        placeholder="Search contests..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full mb-4 p-2 border border-gray-300 rounded"
-      />
+      <h1 className="text-2xl font-bold mb-4">Available Platforms</h1>
 
       {/* Platform Selector */}
       <Select
         isMulti
-        options={platforms}
-        value={selectedPlatforms}
+        options={platformOptions}
+        // Show empty search bar if all are internally selected
+        value={
+          selectedPlatforms.length === platformOptions.length
+            ? []
+            : selectedPlatforms
+        }
         onChange={handlePlatformChange}
         className="mb-6"
-        placeholder="Filter by platforms..."
+        placeholder="Filter by platform..."
       />
 
       {/* Contest List */}
       <ul className="space-y-4">
         {filteredContests.length === 0 ? (
-          <li className="text-gray-500">No contests found.</li>
+          <li className="text-gray-500">No platforms found.</li>
         ) : (
           filteredContests.map((contest) => (
             <li
               key={contest.id}
-              className="p-4 border rounded shadow hover:shadow-lg transition"
+              className="p-4 border rounded shadow hover:shadow-lg transition flex items-center gap-4"
             >
-              <h2 className="text-lg font-semibold">{contest.event}</h2>
-              <p className="text-sm text-gray-600">
-                Platform:{" "}
-                <span className="font-medium">{contest.platform}</span> | Start:{" "}
-                {new Date(contest.start).toLocaleString()}
-              </p>
-              <a
-                href={contest.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline"
-              >
-                View Contest
-              </a>
+              <img
+                src={contest.icon}
+                alt={contest.name}
+                className="w-10 h-10 object-contain"
+              />
+              <span className="text-lg font-semibold">{contest.name}</span>
             </li>
           ))
         )}

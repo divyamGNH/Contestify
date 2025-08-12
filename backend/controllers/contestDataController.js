@@ -33,3 +33,32 @@ export const getContestData = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const getAllPlatforms = async(req,res) => {
+  try {
+    const response = await axios.get("https://clist.by/api/v4/resource/",{
+      params:{
+        username : process.env.CLIST_USERNAME,
+        api_key : process.env.CLIST_API_KEY,
+        limit : 20000,
+        order: "name", //in alphabetical order
+      }
+    });
+
+    const platforms = response.data.objects;
+
+    // console.log(typeof response.data.objects);
+    const simplifiedPlatforms = platforms.map(platform => ({
+      id : platform.id,
+      icon : platform.icon,
+      url : platform.name,
+      name : platform.short,
+    }));
+
+    // console.log(simplifiedPlatforms);
+    res.json(simplifiedPlatforms);
+  } catch (error) {
+    console.error("Error fetching platforms:", error.response?.data || error.message);
+    res.status(500).json({ error: error.message });
+  }
+};
