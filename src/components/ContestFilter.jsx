@@ -39,9 +39,13 @@ export default function ContestFilter() {
   }, []);
 
   // Handle when user selects from dropdown
-  const handlePlatformChange = (selectedOptions) => {
+  const handlePlatformChange = async (selectedOptions) => {
     // If nothing selected, set to [] so no contests are shown
     setSelectedPlatforms(selectedOptions || []);
+    await axios.post(
+      "http://localhost:3000/api/sendPlatforms/storePlatforms", // fixed URL
+      { platforms: selectedOptions || [] } // wrap in object for backend
+    );
   };
 
   // Filtering logic

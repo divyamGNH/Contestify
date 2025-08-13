@@ -6,6 +6,9 @@ import connectDB from "./db/db.js";
 import ContestData from "./routes/getContestData.js";
 import PlatformData from "./routes/getPlatformData.js";
 import authRoutes from "./routes/userRoutes.js";
+import sendPlatforms from "./routes/platformRoutes.js";
+
+import isAuthorized from "./middlewares/isAuthorized.js";
 
 dotenv.config();
 connectDB();
@@ -25,6 +28,7 @@ app.use(cors({
 app.use("/api/getContestData",ContestData);
 app.use("/api/getPlatformData",PlatformData);
 app.use("/api/auth",authRoutes);
+app.use("/api/sendPlatforms",isAuthorized,sendPlatforms);
 
 app.listen(PORT, () => {
     console.log(`Server listening on PORT:${PORT}`);
