@@ -9,7 +9,7 @@ export const storePlatforms = async (req, res) => {
   try {
     await User.findByIdAndUpdate(
       userId,
-      { $addToSet: { selectedPlatforms: { $each: platforms } } },
+      { $addToSet: { selectedPlatforms: { $each: platforms.map(p => p.value) } } },
       { new: true }
     );
 

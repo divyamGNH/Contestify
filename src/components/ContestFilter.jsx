@@ -44,7 +44,8 @@ export default function ContestFilter() {
     setSelectedPlatforms(selectedOptions || []);
     await axios.post(
       "http://localhost:3000/api/sendPlatforms/storePlatforms", // fixed URL
-      { platforms: selectedOptions || [] } // wrap in object for backend
+      { platforms: selectedOptions || [] },// wrap in object for backend
+      { withCredentials: true }
     );
   };
 

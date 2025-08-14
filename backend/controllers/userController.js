@@ -31,7 +31,7 @@ export const register = async (req, res) => {
     console.log("User registered Succesfully");
     res.status(201).json({ message: "User registered successfully." });
   } catch (error) {
-    console.log("error registering",error);
+    console.log("error registering", error);
     res
       .status(500)
       .json({ message: "Error registering user.", error: error.message });
@@ -69,14 +69,12 @@ export const login = async (req, res) => {
     });
 
     console.log("Logged in succesfully");
-    res
-      .status(200)
-      .json({
-        message: "Login successful.",
-        user: { username: user.username, email: user.email },
-      });
+    res.status(200).json({
+      message: "Login successful.",
+      user: { username: user.username, email: user.email },
+    });
   } catch (error) {
-    console.log("Error in logging in",error);
+    console.log("Error in logging in", error);
     res
       .status(500)
       .json({ message: "Error logging in.", error: error.message });
@@ -93,7 +91,16 @@ export const logout = (req, res) => {
     res.status(200).json({ message: "Logged out successfully." });
   } catch (error) {
     console.log("Error in logging out", error);
-    res.status(500).json({ message: "Error logging out.", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error logging out.", error: error.message });
   }
 };
 
+export const checkAuth = (req, res) => {
+  try {
+    res.status(200).json({ user: req.user });
+  } catch (error) {
+    console.log("Error checking Auth : ",error);
+  }
+};
