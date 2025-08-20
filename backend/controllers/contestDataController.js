@@ -4,6 +4,7 @@ import User from "../models/User.js";
 const now = new Date();
 const nextWeek = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
+//Live contest data is provided here.
 export const getContestData = async (req, res) => {
   try {
     const response = await axios.get("https://clist.by/api/v4/contest/", {
@@ -22,6 +23,7 @@ export const getContestData = async (req, res) => {
     const simplifiedObjects = contests.map((contest) => ({
       id: contest.id,
       event: contest.event,
+      host: contest.host,
       platform: contest.resource,
       start: contest.start,
       href: contest.href,
@@ -55,8 +57,8 @@ export const getAllPlatforms = async (req, res) => {
     const simplifiedPlatforms = platforms.map((platform) => ({
       id: platform.id,
       icon: platform.icon,
-      url: platform.name,
-      name: platform.short,
+      name: platform.name,
+      short: platform.short,
     }));
 
     // console.log(simplifiedPlatforms);
@@ -86,3 +88,7 @@ export const getPersonalPlatforms = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+// export const getPersonalLiveContests = async(req,res)=>{
+  
+// }

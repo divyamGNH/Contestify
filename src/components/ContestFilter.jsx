@@ -30,7 +30,7 @@ export default function ContestFilter() {
 
         setPlatformOptions(uniqueOptions);
 
-        // ✅ Select all platforms internally for filtering
+        //Select all platforms internally for filtering
         // setSelectedPlatforms(uniqueOptions);
       })
       .catch((err) => {
@@ -43,7 +43,7 @@ export default function ContestFilter() {
     // If nothing selected, set to [] so no contests are shown
     setSelectedPlatforms(selectedOptions || []);
     await axios.post(
-      "http://localhost:3000/api/sendPlatforms/storePlatforms", // fixed URL
+      "http://localhost:3000/api/sendPlatforms/storePlatforms",
       { platforms: selectedOptions || [] },// wrap in object for backend
       { withCredentials: true }
     );
