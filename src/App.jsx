@@ -7,29 +7,35 @@ import Register from "./components/Register.jsx";
 import Login from "./components/Login.jsx";
 import Home from "./components/Home.jsx";
 
-import { messaging } from "firebase";
+import { messaging } from "./firebase.js";
 import { getToken } from "firebase/messaging";
 
-const VAPID_KEY = process.env.VAPID_KEY;
+const vapid = import.meta.env.VITE_VAPID_KEY;
+
+//Just to check is the vapid is being processed or not;
+console.log(vapid);
 
 function App() {
   const [isRegistered, setIsRegistered] = useState(null); // null = loading
 
-  async function requestPermission(){
-    const permission  = await Notification.requestPermission();
+  async function requestPermission() {
+    const permission = await Notification.requestPermission();
 
-    if(permission == "granted"){
-      //generate token
-      getToken(messaging, {vapidKey : VAPID_KEY});
-    }else if(permission == "denied"){
+    if (permission === "granted") {
+      try {
+        const token = await getToken(messaging, { vapidKey: vapid });
+        console.log("FCM Token:", token);
+      } catch (err) {
+        console.error("Error getting FCM token:", err);
+      }
+    } else if (permission === "denied") {
       alert("You denied the notification permission");
     }
   }
 
-  useEffect(()=>{
-    //As soon as the App mounts we have to ask the user for their notification persmission
+  useEffect(() => {
     requestPermission();
-  })
+  }, []); // run only once on mount
 
   useEffect(() => {
     axios
@@ -38,39 +44,19 @@ function App() {
       .catch(() => setIsRegistered(false));
   }, []);
 
-  if (isRegistered === null) return <div>Loading...</div>; // while checking
+  if (isRegistered === null) return <div>Loading...</div>;
 
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={
-            isRegistered ? <Navigate to="/home" /> : <Navigate to="/login" />
-          }
-        />
-        <Route
-          path="/register"
-          element={isRegistered ? <Navigate to="/home" /> : <Register />}
-        />
+        <Route path="/" element={isRegistered ? <Navigate to="/home" /> : <Navigate to="/login" />} />
+        <Route path="/register" element={isRegistered ? <Navigate to="/home" /> : <Register />} />
         <Route
           path="/login"
-          element={
-            isRegistered ? (
-              <Navigate to="/home" />
-            ) : (
-              <Login setIsRegistered={setIsRegistered} />
-            )
-          }
+          element={isRegistered ? <Navigate to="/home" /> : <Login setIsRegistered={setIsRegistered} />}
         />
-        <Route
-          path="/home"
-          element={isRegistered ? <Home /> : <Navigate to="/login" />}
-        />
-        <Route
-          path="/settings"
-          element={isRegistered ? <ContestFilter /> : <Navigate to="/login" />}
-        />
+        <Route path="/home" element={isRegistered ? <Home /> : <Navigate to="/login" />} />
+        <Route path="/settings" element={isRegistered ? <ContestFilter /> : <Navigate to="/login" />} />
       </Routes>
     </Router>
   );
