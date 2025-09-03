@@ -34,7 +34,7 @@ export const getContestData = async (req, res) => {
   } catch (error) {
     console.error(
       "Error fetching contest:",
-      error.response?.data || error.message
+      error
     );
     res.status(500).json({ error: error.message });
   }

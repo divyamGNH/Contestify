@@ -1,9 +1,10 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const useContestStore = create((set) => ({
+const useContestStore = create((set,get) => ({
   personalPlatforms: [],
   liveContests: [],
+  livePersonalContests: [],
 
   getPersonalPlatforms: async (req, res) => {
     try {
@@ -30,6 +31,25 @@ const useContestStore = create((set) => ({
       console.log("Error fetching live platforms", error);
     }
   },
+
+  getLivePersonalContestData: async(req,res)=>{
+    const {liveContests, personalPlatforms} = get();
+
+    console.log("Personal Platforms:", personalPlatforms);
+    console.log("All Live Contests:", liveContests);
+
+    const platformSet = new Set(personalPlatforms);
+
+    try {
+      const finalData = liveContests.filter(platform => platformSet.has(platform.platform));
+      
+      console.log("Filtered Live Personal Contests:", finalData);
+      
+      set({livePersonalContestData : finalData});
+    } catch (error) {
+      console.log("Error fetching personal and live platforms", error);
+    }
+  }
 }));
 
 export default useContestStore;

@@ -16,7 +16,7 @@ const vapid = import.meta.env.VITE_VAPID_KEY;
 console.log(vapid);
 
 function App() {
-  const [isRegistered, setIsRegistered] = useState(null); // null = loading
+  const [isRegistered, setIsRegistered] = useState(null);
 
   async function requestPermission() {
     const permission = await Notification.requestPermission();

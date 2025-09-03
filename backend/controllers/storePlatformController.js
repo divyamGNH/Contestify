@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 
 export const storePlatforms = async (req, res) => {
-  const platforms = req.body.platforms; // fix: get from req.body
+  const platforms = req.body.platforms;
   console.log("Platforms to add:", platforms);
 
   const userId = req.user.userId; // comes from isAuthorized middleware

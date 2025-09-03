@@ -2,14 +2,22 @@ import React, { useEffect } from "react";
 import useContestStore from "../Store/storeContests";
 
 const Home = () => {
-  // Pull values & functions from Zustand
-  const { personalPlatforms, liveContests, getPersonalPlatforms, getLiveContestData } = useContestStore();
+  const {
+    personalPlatforms = [],          // default empty array
+    livePersonalContestData = [],    // default empty array
+    getPersonalPlatforms,
+    getLiveContestData,
+    getLivePersonalContestData,
+  } = useContestStore();
 
-  // Fetch data on mount
   useEffect(() => {
-    getPersonalPlatforms();
-    getLiveContestData();
-  }, [getPersonalPlatforms, getLiveContestData]);
+    const fetchData = async () => {
+      await getPersonalPlatforms();        // fetch API1
+      await getLiveContestData();          // fetch API2
+      await getLivePersonalContestData();  // filter live contests
+    };
+    fetchData();
+  }, [getPersonalPlatforms, getLiveContestData, getLivePersonalContestData]);
 
   return (
     <div className="max-w-3xl mx-auto p-6">
@@ -38,11 +46,11 @@ const Home = () => {
         Live Contests
       </h2>
 
-      {liveContests.length > 0 ? (
+      {livePersonalContestData.length > 0 ? (
         <ul className="space-y-2">
-          {liveContests.map((contest, index) => (
+          {livePersonalContestData.map((contest, index) => (
             <li key={index} className="p-3 bg-green-100 rounded-lg shadow">
-              {contest.name || JSON.stringify(contest)}
+              {contest.event} - {contest.platform}
             </li>
           ))}
         </ul>
