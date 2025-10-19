@@ -8,13 +8,14 @@ import ContestData from "./routes/getContestData.js";
 import PlatformData from "./routes/getPlatformData.js";
 import authRoutes from "./routes/userRoutes.js";
 import sendPlatforms from "./routes/platformRoutes.js";
+// import notifyRoutes from "./routes/notify.js";
 
 import isAuthorized from "./middlewares/isAuthorized.js";
 
 dotenv.config();
 connectDB();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 app.use(express.json());
@@ -31,6 +32,7 @@ app.use("/api/getContestData",ContestData);
 app.use("/api/getPlatformData",PlatformData);
 app.use("/api/auth",authRoutes);
 app.use("/api/sendPlatforms",isAuthorized,sendPlatforms);
+// app.use("/api/notify", notifyRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server listening on PORT:${PORT}`);
