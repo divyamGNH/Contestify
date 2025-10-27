@@ -7,7 +7,7 @@ import useUserStore from '../Store/useUserStore';
 
 // import Startup from './startup';
 
-const IP = "192.168.29.93";
+const IP = "10.63.99.254";
 
 const App = () => {
 

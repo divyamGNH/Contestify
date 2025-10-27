@@ -1,12 +1,13 @@
 import {create} from "zustand";
 import axios from "axios";
 
-const IP = "192.168.29.93"; // replace with your server IP
+const IP = "10.63.99.254"; // replace with your server IP
 
 const useUserStore = create((set) => ({
   user: null,
   loading: false,
   error: null,
+  authToken : null,
 
   // Fetch username from backend
   getUsername: async (token) => {
@@ -20,7 +21,7 @@ const useUserStore = create((set) => ({
       });
 
       // Update store with fetched user info
-      set({ user: res.data, loading: false });
+      set({ user: res.data, loading: false, authToken:token });
     } catch (error) {
       console.error("Error fetching username:", error);
       set({ error: error.response?.data?.message || error.message, loading: false });

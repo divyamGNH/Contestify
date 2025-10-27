@@ -110,6 +110,7 @@ export const getPersonalPlatforms = async (req, res) => {
     console.log(user.selectedPlatforms);
     res.json(user.selectedPlatforms);
   } catch (error) {
+    console.log("Error fetching personal platforms", error);
     console.error(error);
     res.status(500).json({ message: "Server error" });
   }

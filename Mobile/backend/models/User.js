@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   selectedPlatforms: {
-    type: [String], // Array of platform names, e.g., ["leetcode", "codeforces"]
+    type: [Object], // Array of platform names, e.g., ["leetcode", "codeforces"]
     default: [],    // at start the array is an empty array
   }
 }, { timestamps: true });
