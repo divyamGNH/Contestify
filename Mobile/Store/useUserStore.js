@@ -1,7 +1,7 @@
 import {create} from "zustand";
 import axios from "axios";
 
-const IP = "10.63.99.254"; // replace with your server IP
+const IP = "10.89.23.254"; // replace with your server IP
 
 const useUserStore = create((set) => ({
   user: null,

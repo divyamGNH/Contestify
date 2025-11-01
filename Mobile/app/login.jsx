@@ -15,7 +15,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context'; // Updated SafeAreaView
 import { loginStyles } from '../styles/loginStyles';
 
-const IP = "10.63.99.254";
+const IP = "10.89.23.254";
 
 export default function Login() {
   const [email, setEmail] = useState('');

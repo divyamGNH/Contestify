@@ -15,7 +15,7 @@ import { useState, useEffect } from "react";
 import useUserStore from "../Store/useUserStore";
 import axios from "axios";
 
-const IP = "10.63.99.254";
+const IP = "10.89.23.254";
 
 const AddContest = () => {
   const { authToken } = useUserStore();

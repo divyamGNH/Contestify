@@ -35,7 +35,11 @@ const Settings = () => {
             <Text style={styles.buttonSubtitle}>Contest.</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.buttonDark}>
+          {/* ✅ View Contest button navigates to /yourContest */}
+          <TouchableOpacity
+            style={styles.buttonDark}
+            onPress={() => router.push("/yourContest")}
+          >
             <Text style={styles.buttonTitle}>View</Text>
             <Text style={styles.buttonSubtitle}>Contests.</Text>
           </TouchableOpacity>

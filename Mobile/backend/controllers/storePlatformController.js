@@ -19,3 +19,7 @@ export const storePlatforms = async (req, res) => {
     res.status(500).json({ message: "Error updating platforms", error: error.message });
   }
 };
+
+export const removePlatforms = async() => {
+  // const 
+}

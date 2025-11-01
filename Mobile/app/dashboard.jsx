@@ -16,7 +16,7 @@ import HomePageIcon from "../assets/images/HomePage.svg";
 
 import useUserStore from "../Store/useUserStore.js";
 
-const IP = "10.63.99.254";
+const IP = "10.89.23.254";
 
 const tabs = [
   { key: "live", label: "Live Now" },

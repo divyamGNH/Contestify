@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { ActivityIndicator, Alert, Image, SafeAreaView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { signupStyles } from '../styles/signupStyles';
 
-const IP = '10.63.99.254';
+const IP = '10.89.23.254';
 
 export default function Signup() {
   const [username, setUsername] = useState('');
