@@ -7,82 +7,73 @@ import {
   View,
   ScrollView,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import HomePageIcon from "../assets/images/HomePage.svg";
+import Constants from "expo-constants";
+import BottomNav from "../components/BottomNav.jsx";
+
+const { IP } = Constants.expoConfig.extra;
+
+class SettingsButton {
+  constructor(title, subtitle, variant, onPress) {
+    this.title = title;
+    this.subtitle = subtitle;
+    this.variant = variant;
+    this.onPress = onPress;
+  }
+
+  getBackgroundColor() {
+    switch (this.variant) {
+      case "primary":
+        return "#f5a623";
+      case "danger":
+        return "#e74c3c";
+      default:
+        return "#2a2a2a";
+    }
+  }
+
+  render(key) {
+    return (
+      <TouchableOpacity 
+        key={key} 
+        style={[styles.button, { backgroundColor: this.getBackgroundColor() }]} 
+        onPress={this.onPress}
+      >
+        <Text style={styles.buttonTitle}>{this.title}</Text>
+        <Text style={styles.buttonSubtitle}>{this.subtitle}</Text>
+      </TouchableOpacity>
+    );
+  }
+}
 
 const Settings = () => {
+  const buttons = [
+    new SettingsButton("Add Platforms", "200+ Platforms", "primary", () => router.push("/addContest")),
+    new SettingsButton("View Platforms", "Your platforms", "dark", () => router.push("/yourContest")),
+    // new SettingsButton("Edit", "Contest.", "dark", () => {}),
+    // new SettingsButton("Delete", "Contest.", "dark", () => {}),
+    // new SettingsButton("Manage", "Participants.", "dark", () => {}),
+    new SettingsButton("Log Out", "Good Bye", "danger", () => {}),
+  ];
+
   return (
     <SafeAreaView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <View>
-          <Text style={styles.subHeading}>Organize your contests,</Text>
           <Text style={styles.heading}>SETTINGS</Text>
+          {/* <Text style={styles.subHeading}>Organize your contests</Text> */}
         </View>
-        {/* Empty space for alignment (instead of profile image) */}
+        {/* Empty space for alignment */}
         <View style={{ width: 45, height: 45 }} />
       </View>
 
-      {/* Buttons Section */}
+      {/* Buttons Grid */}
       <ScrollView contentContainerStyle={styles.buttonsContainer}>
-        <View style={styles.row}>
-          {/* ✅ Add Contest button navigates to /addContest */}
-          <TouchableOpacity
-            style={styles.buttonPrimary}
-            onPress={() => router.push("/addContest")}
-          >
-            <Text style={styles.buttonTitle}>Add</Text>
-            <Text style={styles.buttonSubtitle}>Contest.</Text>
-          </TouchableOpacity>
-
-          {/* ✅ View Contest button navigates to /yourContest */}
-          <TouchableOpacity
-            style={styles.buttonDark}
-            onPress={() => router.push("/yourContest")}
-          >
-            <Text style={styles.buttonTitle}>View</Text>
-            <Text style={styles.buttonSubtitle}>Contests.</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.buttonDark}>
-            <Text style={styles.buttonTitle}>Edit</Text>
-            <Text style={styles.buttonSubtitle}>Contest.</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.buttonDark}>
-            <Text style={styles.buttonTitle}>Delete</Text>
-            <Text style={styles.buttonSubtitle}>Contest.</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.buttonDark}>
-            <Text style={styles.buttonTitle}>Manage</Text>
-            <Text style={styles.buttonSubtitle}>Participants.</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.buttonDanger}>
-            <Text style={styles.buttonTitle}>Request</Text>
-            <Text style={styles.buttonSubtitle}>Contest Deletion.</Text>
-          </TouchableOpacity>
+        <View style={styles.buttonGrid}>
+          {buttons.map((button, index) => button.render(index))}
         </View>
       </ScrollView>
-
-      {/* Bottom Navigation */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity
-          style={styles.navItem}
-          onPress={() => router.replace("/dashboard")}
-        >
-          <HomePageIcon width={26} height={26} color="white" />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.navItemActive}>
-          <Ionicons name="settings-sharp" size={24} color="black" />
-        </TouchableOpacity>
-      </View>
+      <BottomNav active="settings" />
     </SafeAreaView>
   );
 };
@@ -113,35 +104,14 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
     marginTop: 20,
   },
-  row: {
+  buttonGrid: {
     flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "space-between",
+  },
+  button: {
+    width: "48%", // 2 buttons per row with gap
     marginBottom: 16,
-  },
-  buttonPrimary: {
-    backgroundColor: "#f5a623",
-    flex: 1,
-    marginRight: 10,
-    paddingVertical: 24,
-    borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "flex-start",
-    paddingLeft: 16,
-  },
-  buttonDark: {
-    backgroundColor: "#2a2a2a",
-    flex: 1,
-    marginRight: 10,
-    paddingVertical: 24,
-    borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "flex-start",
-    paddingLeft: 16,
-  },
-  buttonDanger: {
-    backgroundColor: "#e74c3c",
-    flex: 1,
-    marginRight: 10,
     paddingVertical: 24,
     borderRadius: 12,
     justifyContent: "center",
@@ -157,35 +127,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#fff",
     opacity: 0.8,
-  },
-  bottomNav: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    height: 70,
-    backgroundColor: "#222",
-    borderTopWidth: 1,
-    borderTopColor: "#333",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-  navItem: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100%",
-  },
-  navItemActive: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100%",
-    backgroundColor: "#f5a623",
-    borderRadius: 20,
-    marginVertical: 8,
-    marginHorizontal: 8,
   },
 });
 

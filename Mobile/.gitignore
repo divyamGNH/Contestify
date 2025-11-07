@@ -32,6 +32,8 @@ ios/Pods/
 *.xcuserstate
 *.xcodeproj/project.xcworkspace/
 *.xcodeproj/xcuserdata/
+android/.gradle/
+android/app/.cxx/
 
 # Expo web / React web builds
 web-build/

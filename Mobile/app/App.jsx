@@ -4,10 +4,9 @@ import * as SecureStore from 'expo-secure-store';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import useUserStore from '../Store/useUserStore';
+import Constants from 'expo-constants';
 
-// import Startup from './startup';
-
-const IP = "10.89.23.254";
+const { IP } = Constants.expoConfig.extra;
 
 const App = () => {
 

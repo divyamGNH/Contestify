@@ -1,7 +1,8 @@
 import {create} from "zustand";
 import axios from "axios";
+import Constants from 'expo-constants';
 
-const IP = "10.89.23.254"; // replace with your server IP
+const { IP } = Constants.expoConfig.extra;
 
 const useUserStore = create((set) => ({
   user: null,

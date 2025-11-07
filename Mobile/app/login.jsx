@@ -14,8 +14,9 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'; // Updated SafeAreaView
 import { loginStyles } from '../styles/loginStyles';
+import Constants from 'expo-constants';
 
-const IP = "10.89.23.254";
+const { IP } = Constants.expoConfig.extra;
 
 export default function Login() {
   const [email, setEmail] = useState('');

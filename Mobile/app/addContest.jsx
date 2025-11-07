@@ -14,8 +14,9 @@ import HomePageIcon from "../assets/images/HomePage.svg";
 import { useState, useEffect } from "react";
 import useUserStore from "../Store/useUserStore";
 import axios from "axios";
+import Constants from 'expo-constants';
 
-const IP = "10.89.23.254";
+const { IP } = Constants.expoConfig.extra;
 
 const AddContest = () => {
   const { authToken } = useUserStore();

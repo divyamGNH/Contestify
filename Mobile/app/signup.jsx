@@ -3,8 +3,9 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { ActivityIndicator, Alert, Image, SafeAreaView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { signupStyles } from '../styles/signupStyles';
+import Constants from 'expo-constants';
 
-const IP = '10.89.23.254';
+const { IP } = Constants.expoConfig.extra;
 
 export default function Signup() {
   const [username, setUsername] = useState('');

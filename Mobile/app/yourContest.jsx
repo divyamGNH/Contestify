@@ -11,8 +11,9 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useUserStore from "../Store/useUserStore";
+import Constants from 'expo-constants';
 
-const IP = "10.89.23.254";
+const { IP } = Constants.expoConfig.extra;
 
 const YourContest = () => {
   const { authToken } = useUserStore();

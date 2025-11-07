@@ -10,13 +10,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { router } from 'expo-router';
-import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
+import { router } from "expo-router";
+import { Ionicons, MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 import HomePageIcon from "../assets/images/HomePage.svg";
+import BottomNav from "../components/BottomNav.jsx";
 
 import useUserStore from "../Store/useUserStore.js";
+import Constants from "expo-constants";
 
-const IP = "10.89.23.254";
+const { IP } = Constants.expoConfig.extra;
 
 const tabs = [
   { key: "live", label: "Live Now" },
@@ -26,7 +28,6 @@ const tabs = [
 ];
 
 const LandingPage = () => {
-  // Get username from Zustand store
   const username = useUserStore((state) => state.user?.username);
 
   const [activeTab, setActiveTab] = useState("live");
@@ -38,13 +39,10 @@ const LandingPage = () => {
   });
   const [loading, setLoading] = useState(true);
 
-  // Fetch contests once on mount
   useEffect(() => {
     const fetchContests = async () => {
       try {
-        const { data } = await axios.get(
-          `http://${IP}:3000/api/getContestData/`
-        );
+        const { data } = await axios.get(`http://${IP}:3000/api/getContestData/`);
         setContests(data);
       } catch (err) {
         console.error("Error fetching contests:", err.message);
@@ -139,30 +137,7 @@ const LandingPage = () => {
         <View style={styles.spacing} />
       </ScrollView>
 
-      {/* Bottom Navigation */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity
-          style={styles.navItemActive}
-          onPress={() => {}}
-        >
-          <HomePageIcon
-            width={26}
-            height={26}
-            color="black"
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.navItem}
-          onPress={() => router.replace("/settings")}
-        >
-          <Ionicons
-            name="settings"
-            size={24}
-            color="white"
-          />
-        </TouchableOpacity>
-      </View>
+      <BottomNav/>
     </SafeAreaView>
   );
 };
@@ -232,31 +207,6 @@ const styles = StyleSheet.create({
   contestTime: { color: "#f5a623", marginTop: 6 },
   emptyText: { color: "#777", textAlign: "center", marginVertical: 20 },
   spacing: { height: 40 },
-  bottomNav: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    height: 70,
-    backgroundColor: "#222",
-    borderTopWidth: 1,
-    borderTopColor: "#333",
-  },
-  navItem: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100%",
-  },
-  navItemActive: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100%",
-    backgroundColor: "#f5a623",
-    borderRadius: 20,
-    marginVertical: 8,
-    marginHorizontal: 8,
-  },
 });
 
 export default LandingPage;
