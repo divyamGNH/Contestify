@@ -11,8 +11,6 @@ import {
   View,
 } from "react-native";
 import { router } from "expo-router";
-import { Ionicons, MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
-import HomePageIcon from "../assets/images/HomePage.svg";
 import BottomNav from "../components/BottomNav.jsx";
 
 import useUserStore from "../Store/useUserStore.js";
@@ -29,6 +27,7 @@ const tabs = [
 
 const LandingPage = () => {
   const username = useUserStore((state) => state.user?.username);
+  const authToken = useUserStore.getState().authToken;
 
   const [activeTab, setActiveTab] = useState("live");
   const [contests, setContests] = useState({
@@ -39,6 +38,11 @@ const LandingPage = () => {
   });
   const [loading, setLoading] = useState(true);
 
+  // CF API Data
+  const [cfData, setCfData] = useState(null);
+  const [cfLoading, setCfLoading] = useState(true);
+
+  // Fetch contests
   useEffect(() => {
     const fetchContests = async () => {
       try {
@@ -52,6 +56,29 @@ const LandingPage = () => {
     };
 
     fetchContests();
+  }, []);
+
+  // Fetch Codeforces info
+  useEffect(() => {
+    const fetchCfData = async () => {
+      try {
+        const res = await axios.get(`http://${IP}:3000/api/getCfInfo/`, {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
+
+        if (res.data.success) {
+          setCfData(res.data.data);
+        }
+      } catch (err) {
+        console.log("CF Fetch Error:", err?.response?.data || err);
+      } finally {
+        setCfLoading(false);
+      }
+    };
+
+    fetchCfData();
   }, []);
 
   const renderContest = ({ item }) => (
@@ -69,6 +96,7 @@ const LandingPage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
+
         {/* Header */}
         <View style={styles.header}>
           <View>
@@ -79,24 +107,52 @@ const LandingPage = () => {
           </View>
         </View>
 
-        {/* CodeForces Card */}
-        <View style={styles.card}>
+        {/* CODEFORCES CARD */}
+        <TouchableOpacity
+          onPress={() => router.push("/addHandle")}
+          activeOpacity={0.85}
+          style={styles.card}
+        >
           <View style={styles.cardHeader}>
             <Text style={styles.cardBrand}>🚀 CODEFORCES</Text>
           </View>
+
           <View style={styles.cardContent}>
-            <Text style={styles.cardTitle}>NEWBIE</Text>
-            <Text style={styles.cardSubtitle}>
-              with a current rating of 1026 [+120]
+            {cfLoading ? (
+              <ActivityIndicator size="small" color="#000" />
+            ) : cfData ? (
+              <>
+                <Text style={styles.cardTitle}>
+                  {cfData.rank ? cfData.rank.toUpperCase() : "UNRATED"}
+                </Text>
+
+                <Text style={styles.cardSubtitle}>
+                  Rating {cfData.rating}{" "}
+                  {cfData.ratingChange >= 0
+                    ? `+${cfData.ratingChange}`
+                    : cfData.ratingChange}
+                </Text>
+              </>
+            ) : (
+              <>
+                <Text style={styles.cardTitle}>NO RANK</Text>
+                <Text style={styles.cardSubtitle}>Rating —</Text>
+              </>
+            )}
+          </View>
+
+          <View style={styles.cardFooter}>
+            <Text style={styles.cardRank}>
+              LASTRANK {cfData?.lastContestRank || "—"}
+            </Text>
+
+            <Text style={styles.cardUsername}>
+              {cfData?.handle?.toUpperCase() || "NO HANDLE"}
             </Text>
           </View>
-          <View style={styles.cardFooter}>
-            <Text style={styles.cardRank}>LASTRANK 10242</Text>
-            <Text style={styles.cardUsername}>DIVYAMGNH</Text>
-          </View>
-        </View>
+        </TouchableOpacity>
 
-        {/* Tab Navigation */}
+        {/* Tabs */}
         <View style={styles.tabContainer}>
           {tabs.map((tab) => (
             <TouchableOpacity
@@ -116,7 +172,7 @@ const LandingPage = () => {
           ))}
         </View>
 
-        {/* Content Section */}
+        {/* Contest List */}
         {loading ? (
           <ActivityIndicator
             size="large"
@@ -137,13 +193,14 @@ const LandingPage = () => {
         <View style={styles.spacing} />
       </ScrollView>
 
-      <BottomNav/>
+      <BottomNav />
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#1a1a1a" },
+
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -154,6 +211,8 @@ const styles = StyleSheet.create({
   },
   greeting: { fontSize: 18, color: "#999", fontWeight: "400" },
   name: { fontSize: 32, color: "#f5a623", fontWeight: "bold", marginTop: 4 },
+
+  /* CF CARD */
   card: {
     backgroundColor: "#e8e8e8",
     borderRadius: 12,
@@ -179,6 +238,8 @@ const styles = StyleSheet.create({
   cardFooter: { flexDirection: "row", justifyContent: "space-between" },
   cardRank: { fontSize: 12, color: "#333", fontWeight: "500" },
   cardUsername: { fontSize: 12, color: "#333", fontWeight: "500" },
+
+  /* Tabs */
   tabContainer: {
     flexDirection: "row",
     gap: 12,
@@ -195,6 +256,8 @@ const styles = StyleSheet.create({
   tabActive: { backgroundColor: "#f5a623" },
   tabLabel: { color: "#fff", fontWeight: "600" },
   tabLabelActive: { color: "#1a1a1a" },
+
+  /* Contest Card */
   contestCard: {
     backgroundColor: "#222",
     padding: 16,

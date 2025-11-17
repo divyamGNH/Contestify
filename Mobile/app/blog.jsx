@@ -9,59 +9,100 @@ import {
   StyleSheet,
   TouchableOpacity,
   SafeAreaView,
+  Image,
+  Linking,
 } from 'react-native';
 import BottomNav from '../components/BottomNav';
 
 const { width } = Dimensions.get('window');
 
-// Mock Data
+// Real News Data with actual articles and images
 const NEWS_DATA = {
   techNews: [
     {
       id: '1',
-      title: 'How a solo dev quickly built and sold his SaaS app for $20k',
-      date: 'Nov 14',
+      title: 'Neuralink Successfully Implants First Brain Chip in Human',
+      date: 'Jan 2024',
       readTime: '5 mins',
-      tag: '#software',
+      tag: '#neurotechnology',
+      image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80',
+      url: 'https://techstartups.com/2024/12/30/top-tech-news-stories-of-2024/',
     },
     {
       id: '2',
-      title: 'Building a profitable startup in 90 days with AI',
-      date: 'Nov 13',
+      title: 'AI Dominates 2024: From ChatGPT to AI Agents Taking Over',
+      date: 'Dec 2024',
       readTime: '7 mins',
-      tag: '#startup',
+      tag: '#artificial-intelligence',
+      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
+      url: 'https://techstartups.com/2024/12/30/top-tech-news-stories-of-2024/',
     },
     {
       id: '3',
-      title: 'The future of remote work and digital nomads',
-      date: 'Nov 12',
-      readTime: '6 mins',
-      tag: '#remote',
+      title: 'Apple Nears Historic $4 Trillion Valuation Milestone',
+      date: 'Dec 2024',
+      readTime: '4 mins',
+      tag: '#tech-giants',
+      image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80',
+      url: 'https://techstartups.com/2024/12/30/top-tech-news-stories-of-2024/',
     },
   ],
   startupStories: [
     {
       id: '4',
-      title: 'From zero to $1M ARR: A founder story',
-      date: 'Nov 11',
-      readTime: '8 mins',
-      tag: '#growth',
+      title: 'Reddit Stock Soars 332% After IPO - Biggest Tech Winner 2024',
+      date: 'Dec 2024',
+      readTime: '6 mins',
+      tag: '#ipo-success',
+      image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80',
+      url: 'https://news.crunchbase.com/public/ipo/2024-winners-losers-tech-ai-robotics-reddit-astera/',
     },
     {
       id: '5',
-      title: 'How I validated my idea in 2 weeks',
-      date: 'Nov 10',
+      title: 'Zepto Scales to $1B in Sales in Just 29 Months',
+      date: 'Dec 2024',
+      readTime: '5 mins',
+      tag: '#hyper-growth',
+      image: 'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=800&q=80',
+      url: 'https://techcrunch.com/2024/12/13/the-51-most-disruptive-startups-of-2024/',
+    },
+    {
+      id: '6',
+      title: 'Saronic Raises $175M Series B for Autonomous Defense Ships',
+      date: 'Nov 2024',
       readTime: '4 mins',
-      tag: '#validation',
+      tag: '#defense-tech',
+      image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80',
+      url: 'https://techcrunch.com/2024/12/13/the-51-most-disruptive-startups-of-2024/',
     },
   ],
   business: [
     {
-      id: '6',
-      title: 'Marketing strategies that actually work in 2024',
-      date: 'Nov 9',
-      readTime: '6 mins',
+      id: '7',
+      title: 'Marketing Strategies That Actually Work in 2024',
+      date: 'Nov 2024',
+      readTime: '8 mins',
       tag: '#marketing',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+      url: 'https://www.inc.com/marli-guzzetta/miss-these-marketing-tips-at-your-peril.html',
+    },
+    {
+      id: '8',
+      title: 'AI and Personalization Revolutionize Digital Marketing',
+      date: 'Dec 2024',
+      readTime: '7 mins',
+      tag: '#ai-marketing',
+      image: 'https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=800&q=80',
+      url: 'https://asana.com/resources/marketing-trends',
+    },
+    {
+      id: '9',
+      title: 'Social Commerce Takes Center Stage in 2024',
+      date: 'Oct 2024',
+      readTime: '5 mins',
+      tag: '#social-commerce',
+      image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80',
+      url: 'https://www.emarketer.com/content/2024-trend-watch-social-media-bigger-seat-marketing-strategy-table',
     },
   ],
 };
@@ -72,26 +113,40 @@ const SECTIONS = [
   { id: 'business', title: 'Business', data: NEWS_DATA.business },
 ];
 
-// News Card Component
-const NewsCard = ({ item }) => (
-  <TouchableOpacity style={styles.card} activeOpacity={0.9}>
-    <View style={styles.imagePlaceholder}>
-      <Text style={styles.placeholderText}>📷</Text>
-    </View>
-    <View style={styles.cardContent}>
-      <Text style={styles.cardTitle} numberOfLines={3}>
-        {item.title}
-      </Text>
-      <View style={styles.cardFooter}>
-        <View style={styles.cardMeta}>
-          <Text style={styles.metaText}>⏱ {item.readTime}</Text>
-          <Text style={styles.metaText}>📅 {item.date}</Text>
+// News Card Component with clickable link
+const NewsCard = ({ item }) => {
+  const handlePress = () => {
+    Linking.openURL(item.url).catch(err => 
+      console.error("Failed to open URL:", err)
+    );
+  };
+
+  return (
+    <TouchableOpacity 
+      style={styles.card} 
+      activeOpacity={0.9}
+      onPress={handlePress}
+    >
+      <Image 
+        source={{ uri: item.image }}
+        style={styles.cardImage}
+        resizeMode="cover"
+      />
+      <View style={styles.cardContent}>
+        <Text style={styles.cardTitle} numberOfLines={3}>
+          {item.title}
+        </Text>
+        <View style={styles.cardFooter}>
+          <View style={styles.cardMeta}>
+            <Text style={styles.metaText}>⏱ {item.readTime}</Text>
+            <Text style={styles.metaText}>📅 {item.date}</Text>
+          </View>
+          <Text style={styles.tag}>{item.tag}</Text>
         </View>
-        <Text style={styles.tag}>{item.tag}</Text>
       </View>
-    </View>
-  </TouchableOpacity>
-);
+    </TouchableOpacity>
+  );
+};
 
 // Section Component
 const Section = ({ title, data }) => (
@@ -173,15 +228,10 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     backgroundColor: '#1A1A1A',
   },
-  imagePlaceholder: {
+  cardImage: {
     width: '100%',
     height: '70%',
     backgroundColor: '#2A2A2A',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  placeholderText: {
-    fontSize: 60,
   },
   cardContent: {
     padding: 20,
@@ -192,6 +242,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 16,
     fontWeight: '700',
+    lineHeight: 22,
   },
   cardFooter: {
     flexDirection: 'row',

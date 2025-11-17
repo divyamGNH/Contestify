@@ -21,5 +21,5 @@ export const storePlatforms = async (req, res) => {
 };
 
 export const removePlatforms = async() => {
-  // const 
+  
 }

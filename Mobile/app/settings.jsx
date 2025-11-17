@@ -1,14 +1,17 @@
 import { router } from "expo-router";
 import {
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
   ScrollView,
+  Alert,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context"; // ✅ FIXED
 import Constants from "expo-constants";
 import BottomNav from "../components/BottomNav.jsx";
+import useUserStore from "../Store/useUserStore.js";
+import axios from "axios";
 
 const { IP } = Constants.expoConfig.extra;
 
@@ -24,6 +27,8 @@ class SettingsButton {
     switch (this.variant) {
       case "primary":
         return "#f5a623";
+      case "secondary":
+        return "#3498db";
       case "danger":
         return "#e74c3c";
       default:
@@ -33,9 +38,9 @@ class SettingsButton {
 
   render(key) {
     return (
-      <TouchableOpacity 
-        key={key} 
-        style={[styles.button, { backgroundColor: this.getBackgroundColor() }]} 
+      <TouchableOpacity
+        key={key}
+        style={[styles.button, { backgroundColor: this.getBackgroundColor() }]}
         onPress={this.onPress}
       >
         <Text style={styles.buttonTitle}>{this.title}</Text>
@@ -46,43 +51,90 @@ class SettingsButton {
 }
 
 const Settings = () => {
+  const authToken = useUserStore.getState().authToken;
+
+  const handleTestMail = async () => {
+    try {
+      if (!authToken) {
+        Alert.alert("Error", "You are not logged in.");
+        return;
+      }
+
+      const res = await axios.post(
+        `http://${IP}:3000/api/test/email`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+
+      if (res.data.success) {
+        Alert.alert("Success", "Test email sent!");
+      } else {
+        Alert.alert("Error", res.data.message || "Failed to send test email.");
+      }
+    } catch (err) {
+      console.error("TEST MAIL ERROR:", err?.response?.data || err.message);
+      Alert.alert("Error", "Network or server error.");
+    }
+  };
+
+  const handleLogout = () => {
+    Alert.alert("Log Out", "Are you sure you want to log out?", [
+      { text: "Cancel", style: "cancel" },
+      {
+        text: "Log Out",
+        style: "destructive",
+        onPress: () => {
+          useUserStore.getState().setAuthToken(null);
+          router.replace("/login");
+        },
+      },
+    ]);
+  };
+
+  // --------------------------
+  // 🔥 Buttons List
+  // --------------------------
   const buttons = [
-    new SettingsButton("Add Platforms", "200+ Platforms", "primary", () => router.push("/addContest")),
-    new SettingsButton("View Platforms", "Your platforms", "dark", () => router.push("/yourContest")),
-    // new SettingsButton("Edit", "Contest.", "dark", () => {}),
-    // new SettingsButton("Delete", "Contest.", "dark", () => {}),
-    // new SettingsButton("Manage", "Participants.", "dark", () => {}),
-    new SettingsButton("Log Out", "Good Bye", "danger", () => {}),
+    new SettingsButton("Add Platforms", "200+ Platforms", "primary", () =>
+      router.push("/addContest")
+    ),
+    new SettingsButton("View Platforms", "Your platforms", "dark", () =>
+      router.push("/yourContest")
+    ),
+    new SettingsButton("Add Handle", "Codeforces", "secondary", () =>
+      router.push("/addHandle")
+    ),
+
+    // ⭐ Test Email Button
+    new SettingsButton("Test Mail", "Send a test email", "secondary", handleTestMail),
+
+    new SettingsButton("Log Out", "Good Bye", "danger", handleLogout),
   ];
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
-        <View>
-          <Text style={styles.heading}>SETTINGS</Text>
-          {/* <Text style={styles.subHeading}>Organize your contests</Text> */}
-        </View>
-        {/* Empty space for alignment */}
+        <Text style={styles.heading}>SETTINGS</Text>
         <View style={{ width: 45, height: 45 }} />
       </View>
 
-      {/* Buttons Grid */}
       <ScrollView contentContainerStyle={styles.buttonsContainer}>
         <View style={styles.buttonGrid}>
           {buttons.map((button, index) => button.render(index))}
         </View>
       </ScrollView>
+
       <BottomNav active="settings" />
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#1a1a1a",
-  },
+  container: { flex: 1, backgroundColor: "#1a1a1a" },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -90,15 +142,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 10,
   },
-  subHeading: {
-    fontSize: 14,
-    color: "#999",
-  },
-  heading: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#f5a623",
-  },
+  heading: { fontSize: 28, fontWeight: "bold", color: "#f5a623" },
   buttonsContainer: {
     paddingHorizontal: 20,
     paddingBottom: 100,
@@ -110,7 +154,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   button: {
-    width: "48%", // 2 buttons per row with gap
+    width: "48%",
     marginBottom: 16,
     paddingVertical: 24,
     borderRadius: 12,

@@ -5,17 +5,10 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import useUserStore from '../Store/useUserStore';
 import Constants from 'expo-constants';
-import * as Notifications from "expo-notifications";
+// import * as Notifications from "expo-notifications";
 
 const { IP } = Constants.expoConfig.extra;
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: false,
-  }),
-});
 
 const App = () => {
 
@@ -64,16 +57,16 @@ const App = () => {
     checkAuth();
   },[]);
 
-  useEffect(()=>{
-    const requestNotificationPermission = async() => {
-      const {status} = await Notifications.requestPermissionsAsync();
-      if(status !== 'granted'){
-        alert("Permission for notification granted");
-      }
-    };
+  // useEffect(()=>{
+  //   const requestNotificationPermission = async() => {
+  //     const {status} = await Notifications.requestPermissionsAsync();
+  //     if(status !== 'granted'){
+  //       alert("Permission for notification not granted!");
+  //     }
+  //   };
 
-    requestNotificationPermission();
-  },[])
+  //   requestNotificationPermission();
+  // },[])
 
   if (loading) {
     return (

@@ -9,9 +9,10 @@ import PlatformData from "./routes/getPlatformData.js";
 import sendPlatforms from "./routes/platformRoutes.js";
 import authRoutes from "./routes/userRoutes.js";
 import userInfo from "./routes/getUserInfo.js";
-// import notifyRoutes from "./routes/notify.js";
+import CfInfoRoutes from "./routes/getCfInfo.js";
 
 import isAuthorized from "./middlewares/isAuthorized.js";
+import testEmailRoutes from "./routes/testMail.js";
 
 dotenv.config();
 connectDB();
@@ -19,23 +20,31 @@ connectDB();
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+
+// Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors({
-  origin: "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: "*", // allow phone & local dev
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
-app.use("/api/getContestData",ContestData);
-app.use("/api/getPlatformData",PlatformData);
-app.use("/api/auth",authRoutes);
-app.use("/api/sendPlatforms",isAuthorized,sendPlatforms);
-app.use("/api/getUserInfo",isAuthorized, userInfo);
-// app.use("/api/notify", notifyRoutes);
+// ROUTES
+app.use("/api/getContestData", ContestData);
+app.use("/api/getPlatformData", PlatformData);
+app.use("/api/auth", authRoutes);
+app.use("/api/sendPlatforms", isAuthorized, sendPlatforms);
+app.use("/api/getUserInfo", isAuthorized, userInfo);
 
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server listening on PORT:${PORT}`);
+app.use("/api/getCfInfo", CfInfoRoutes);
+app.use("/api/test", isAuthorized, testEmailRoutes);
+
+// SERVER
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server listening on PORT: ${PORT}`);
 });

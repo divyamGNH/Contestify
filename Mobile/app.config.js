@@ -16,6 +16,7 @@ export default {
     },
 
     android: {
+      package: "com.divyam.contestreminder",
       adaptiveIcon: {
         backgroundColor: "#E6F4FE",
         foregroundImage: "./assets/images/android-icon-foreground.png",
@@ -56,6 +57,9 @@ export default {
 
     extra: {
       IP: process.env.IP,
+      eas: {
+        projectId: "4efa4e6f-ff58-4905-a4bd-dc2caeddaf5c", // 👈 added this
+      },
     },
   },
 };
