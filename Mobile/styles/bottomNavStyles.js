@@ -10,13 +10,13 @@ export const bottomNavStyles = StyleSheet.create({
   },
   navBar: {
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#fffdf8',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingTop: 12,
     paddingBottom: 20,
     paddingHorizontal: 20,
-    shadowColor: '#000',
+    shadowColor: '#7c5f3b',
     shadowOpacity: 0.1,
     shadowRadius: 20,
     shadowOffset: {
@@ -25,7 +25,7 @@ export const bottomNavStyles = StyleSheet.create({
     },
     elevation: 10,
     borderTopWidth: 1,
-    borderTopColor: '#F3F4F6',
+    borderTopColor: '#eadfca',
   },
   navItem: {
     flex: 1,
@@ -44,11 +44,11 @@ export const bottomNavStyles = StyleSheet.create({
     marginBottom: 4,
   },
   activeIconContainer: {
-    backgroundColor: '#8B5CF6',
+    backgroundColor: '#17324d',
   },
   icon: {
     fontSize: 20,
-    color: '#9CA3AF',
+    color: '#8b7355',
   },
   activeIcon: {
     color: '#FFFFFF',
@@ -56,10 +56,10 @@ export const bottomNavStyles = StyleSheet.create({
   label: {
     fontSize: 12,
     fontWeight: '500',
-    color: '#9CA3AF',
+    color: '#8b7355',
   },
   activeLabel: {
-    color: '#8B5CF6',
+    color: '#17324d',
     fontWeight: '600',
   },
 });

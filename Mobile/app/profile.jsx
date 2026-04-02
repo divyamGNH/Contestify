@@ -41,7 +41,7 @@ export default function Profile() {
 
   return (
     <SafeAreaView style={profileStyles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#6366F1" />
+      <StatusBar barStyle="light-content" backgroundColor="#17324d" />
       
       {/* Header */}
       <View style={profileStyles.header}>

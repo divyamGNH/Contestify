@@ -10,6 +10,7 @@ import sendPlatforms from "./routes/platformRoutes.js";
 import authRoutes from "./routes/userRoutes.js";
 import userInfo from "./routes/getUserInfo.js";
 import CfInfoRoutes from "./routes/getCfInfo.js";
+import chatRoutes from "./routes/chatRoutes.js";
 
 import isAuthorized from "./middlewares/isAuthorized.js";
 import testEmailRoutes from "./routes/testMail.js";
@@ -43,6 +44,7 @@ app.use("/api/getUserInfo", isAuthorized, userInfo);
 
 app.use("/api/getCfInfo", CfInfoRoutes);
 app.use("/api/test", isAuthorized, testEmailRoutes);
+app.use("/api/chat", isAuthorized, chatRoutes);
 
 // SERVER
 app.listen(PORT, "0.0.0.0", () => {

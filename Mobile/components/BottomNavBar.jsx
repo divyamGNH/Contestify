@@ -1,4 +1,5 @@
 import { router, usePathname } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { bottomNavStyles } from '../styles/bottomNavStyles';
 
@@ -8,28 +9,35 @@ export default function BottomNavBar() {
   const navigationItems = [
     {
       id: 'home',
-      icon: '🏠',
+      iconName: 'home-outline',
       label: 'Home',
       route: '/dashboard',
       isActive: pathname === '/dashboard'
     },
     {
       id: 'problems',
-      icon: '💻',
+      iconName: 'code-slash-outline',
       label: 'Problems',
       route: '/problems',
       isActive: pathname === '/problems'
     },
     {
       id: 'contests',
-      icon: '🏆',
+      iconName: 'trophy-outline',
       label: 'Contests',
       route: '/contest-discovery',
       isActive: pathname === '/contest-discovery'
     },
     {
+      id: 'chat',
+      iconName: 'chatbubble-ellipses-outline',
+      label: 'Chat',
+      route: '/chat',
+      isActive: pathname === '/chat'
+    },
+    {
       id: 'profile',
-      icon: '👤',
+      iconName: 'person-outline',
       label: 'Profile',
       route: '/profile',
       isActive: pathname === '/profile'
@@ -56,12 +64,11 @@ export default function BottomNavBar() {
               bottomNavStyles.iconContainer,
               item.isActive && bottomNavStyles.activeIconContainer
             ]}>
-              <Text style={[
-                bottomNavStyles.icon,
-                item.isActive && bottomNavStyles.activeIcon
-              ]}>
-                {item.icon}
-              </Text>
+              <Ionicons
+                name={item.iconName}
+                size={20}
+                color={item.isActive ? '#FFFFFF' : '#8b7355'}
+              />
             </View>
             <Text style={[
               bottomNavStyles.label,

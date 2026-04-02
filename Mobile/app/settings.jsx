@@ -7,7 +7,7 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context"; // ✅ FIXED
+import { SafeAreaView } from "react-native-safe-area-context";
 import Constants from "expo-constants";
 import BottomNav from "../components/BottomNav.jsx";
 import useUserStore from "../Store/useUserStore.js";
@@ -26,13 +26,13 @@ class SettingsButton {
   getBackgroundColor() {
     switch (this.variant) {
       case "primary":
-        return "#f5a623";
+        return "#17324d";
       case "secondary":
-        return "#3498db";
+        return "#0f766e";
       case "danger":
-        return "#e74c3c";
+        return "#ff7849";
       default:
-        return "#2a2a2a";
+        return "#7b6a53";
     }
   }
 
@@ -88,16 +88,13 @@ const Settings = () => {
         text: "Log Out",
         style: "destructive",
         onPress: () => {
-          useUserStore.getState().setAuthToken(null);
+          useUserStore.getState().logout();
           router.replace("/login");
         },
       },
     ]);
   };
 
-  // --------------------------
-  // 🔥 Buttons List
-  // --------------------------
   const buttons = [
     new SettingsButton("Add Platforms", "200+ Platforms", "primary", () =>
       router.push("/addContest")
@@ -134,7 +131,7 @@ const Settings = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#1a1a1a" },
+  container: { flex: 1, backgroundColor: "#f5efe3" },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -142,7 +139,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 10,
   },
-  heading: { fontSize: 28, fontWeight: "bold", color: "#f5a623" },
+  heading: { fontSize: 28, fontWeight: "bold", color: "#17324d" },
   buttonsContainer: {
     paddingHorizontal: 20,
     paddingBottom: 100,
@@ -157,10 +154,15 @@ const styles = StyleSheet.create({
     width: "48%",
     marginBottom: 16,
     paddingVertical: 24,
-    borderRadius: 12,
+    borderRadius: 14,
     justifyContent: "center",
     alignItems: "flex-start",
     paddingLeft: 16,
+    shadowColor: "#7c5f3b",
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 2,
   },
   buttonTitle: {
     fontSize: 16,

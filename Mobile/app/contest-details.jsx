@@ -10,7 +10,7 @@ export default function ContestDetails() {
 
   return (
     <SafeAreaView style={contestDetailsStyles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#8B5CF6" />
+      <StatusBar barStyle="light-content" backgroundColor="#17324d" />
       
       {/* Header */}
       <View style={contestDetailsStyles.header}>

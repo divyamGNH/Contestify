@@ -32,7 +32,7 @@ const useContestStore = create((set,get) => ({
     }
   },
 
-  getLivePersonalContestData: async(req,res)=>{
+  getLivePersonalContestData: async()=>{
     const {liveContests, personalPlatforms} = get();
 
     console.log("Personal Platforms:", personalPlatforms);

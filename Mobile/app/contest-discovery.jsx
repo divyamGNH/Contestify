@@ -236,8 +236,8 @@ export default function ContestDiscovery() {
     return (
       <SafeAreaView style={contestDiscoveryStyles.container}>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <ActivityIndicator size="large" color="#3B82F6" />
-          <Text style={{ marginTop: 10, color: '#6B7280' }}>
+          <ActivityIndicator size="large" color="#17324d" />
+          <Text style={{ marginTop: 10, color: '#7b6a53' }}>
             Loading contests...
           </Text>
         </View>
@@ -254,7 +254,7 @@ export default function ContestDiscovery() {
           </Text>
           <TouchableOpacity 
             onPress={fetchData}
-            style={{ marginTop: 20, backgroundColor: '#3B82F6', padding: 12, borderRadius: 8 }}
+            style={{ marginTop: 20, backgroundColor: '#17324d', padding: 12, borderRadius: 8 }}
           >
             <Text style={{ color: '#FFFFFF', fontWeight: '600' }}>Retry</Text>
           </TouchableOpacity>
@@ -347,7 +347,7 @@ export default function ContestDiscovery() {
         
         {filteredContests.length === 0 ? (
           <View style={{ padding: 20, alignItems: 'center' }}>
-            <Text style={{ color: '#6B7280', fontSize: 16 }}>No contests found</Text>
+            <Text style={{ color: '#7b6a53', fontSize: 16 }}>No contests found</Text>
           </View>
         ) : (
           filteredContests.map((contest) => (

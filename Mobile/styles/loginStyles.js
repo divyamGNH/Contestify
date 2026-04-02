@@ -3,17 +3,24 @@ import { StyleSheet } from 'react-native';
 export const loginStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1a1a',
+    backgroundColor: '#f5efe3',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
   },
   card: {
     width: '100%',
-    backgroundColor: '#222',
-    borderRadius: 12,
+    backgroundColor: '#fffdf8',
+    borderRadius: 18,
     padding: 24,
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#eadfca',
+    shadowColor: '#7c5f3b',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 3,
   },
   iconContainer: {
     marginBottom: 16,
@@ -22,33 +29,35 @@ export const loginStyles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#f5a623',
+    backgroundColor: '#17324d',
     justifyContent: 'center',
     alignItems: 'center',
   },
   iconText: {
     fontSize: 28,
-    color: '#1a1a1a',
+    color: '#fff',
     fontWeight: 'bold',
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#f5a623',
+    color: '#17324d',
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
-    color: '#999',
+    color: '#7b6a53',
     marginBottom: 24,
   },
   input: {
     width: '100%',
-    backgroundColor: '#333',
-    color: '#fff',
+    backgroundColor: '#f6efe1',
+    color: '#17324d',
     padding: 12,
-    borderRadius: 8,
+    borderRadius: 12,
     marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#eadfca',
   },
   passwordContainer: {
     width: '100%',
@@ -64,7 +73,7 @@ export const loginStyles = StyleSheet.create({
   },
   eye: {
     fontSize: 18,
-    color: '#f5a623',
+    color: '#17324d',
   },
   forgotContainer: {
     width: '100%',
@@ -72,19 +81,19 @@ export const loginStyles = StyleSheet.create({
     marginBottom: 16,
   },
   forgotText: {
-    color: '#f5a623',
+    color: '#0f766e',
     fontWeight: '500',
   },
   signInButton: {
     width: '100%',
-    backgroundColor: '#f5a623',
+    backgroundColor: '#17324d',
     padding: 14,
-    borderRadius: 8,
+    borderRadius: 12,
     alignItems: 'center',
     marginBottom: 16,
   },
   signInText: {
-    color: '#1a1a1a',
+    color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
   },
@@ -97,20 +106,22 @@ export const loginStyles = StyleSheet.create({
   divider: {
     flex: 1,
     height: 1,
-    backgroundColor: '#444',
+    backgroundColor: '#d8cab1',
   },
   orText: {
-    color: '#999',
+    color: '#8b7355',
     marginHorizontal: 8,
   },
   socialButton: {
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
-    backgroundColor: '#333',
+    backgroundColor: '#fff',
     padding: 12,
-    borderRadius: 8,
+    borderRadius: 12,
     marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#eadfca',
   },
   socialImage: {
     width: 24,
@@ -118,7 +129,7 @@ export const loginStyles = StyleSheet.create({
     marginRight: 12,
   },
   socialText: {
-    color: '#fff',
+    color: '#17324d',
     fontWeight: '500',
   },
   signupContainer: {
@@ -126,10 +137,10 @@ export const loginStyles = StyleSheet.create({
     marginTop: 8,
   },
   signupText: {
-    color: '#999',
+    color: '#7b6a53',
   },
   signupLink: {
-    color: '#f5a623',
+    color: '#0f766e',
     fontWeight: '500',
   },
 });

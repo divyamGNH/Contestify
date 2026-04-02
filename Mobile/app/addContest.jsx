@@ -50,7 +50,7 @@ const AddContest = () => {
     };
 
     getPlatformData();
-  }, []);
+  }, [authToken]);
 
   useEffect(() => {
     if (!authToken || selectedPlatforms.length === 0) return;
@@ -73,7 +73,7 @@ const AddContest = () => {
     };
 
     sendPlatformtoDB();
-  }, [selectedPlatforms]);
+  }, [authToken, selectedPlatforms]);
 
   // Filter platforms based on search query
   const filteredPlatforms = allPlatforms.filter((platform) => {
@@ -164,7 +164,7 @@ const AddContest = () => {
           ListEmptyComponent={
             <View style={styles.emptyContainer}>
               <Text style={styles.emptyText}>
-                No platforms found matching "{searchQuery}"
+                No platforms found matching {searchQuery}
               </Text>
             </View>
           }
@@ -177,11 +177,11 @@ const AddContest = () => {
           style={styles.navItem}
           onPress={() => router.replace("/dashboard")}
         >
-          <HomePageIcon width={26} height={26} color="white" />
+          <HomePageIcon width={26} height={26} color="#8b7355" />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.navItemActive} onPress={() => {}}>
-          <Ionicons name="add-circle" size={24} color="black" />
+          <Ionicons name="add-circle" size={24} color="white" />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -191,7 +191,7 @@ const AddContest = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1a1a1a",
+    backgroundColor: "#f5efe3",
   },
   header: {
     padding: 20,
@@ -200,27 +200,27 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 28,
     fontWeight: "bold",
-    color: "#f5a623",
+    color: "#17324d",
     marginBottom: 4,
   },
   counterText: {
     fontSize: 14,
-    color: "#999",
+    color: "#7b6a53",
   },
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#2a2a2a",
+    backgroundColor: "#fffdf8",
     marginHorizontal: 20,
     marginBottom: 16,
     paddingHorizontal: 12,
-    borderRadius: 12,
+    borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#444",
+    borderColor: "#eadfca",
   },
   searchInput: {
     flex: 1,
-    color: "#fff",
+    color: "#17324d",
     fontSize: 16,
     paddingVertical: 12,
     marginLeft: 8,
@@ -232,12 +232,12 @@ const styles = StyleSheet.create({
   platformCard: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#2a2a2a",
+    backgroundColor: "#fffdf8",
     padding: 12,
     borderRadius: 12,
     marginBottom: 10,
     borderWidth: 1,
-    borderColor: "#333",
+    borderColor: "#eadfca",
   },
   platformIcon: {
     width: 36,
@@ -248,18 +248,18 @@ const styles = StyleSheet.create({
   platformName: {
     flex: 1,
     fontSize: 16,
-    color: "#fff",
-    fontWeight: "500",
+    color: "#17324d",
+    fontWeight: "700",
   },
   addButton: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: "#f5a623",
+    backgroundColor: "#17324d",
     borderRadius: 8,
     marginLeft: 12,
   },
   addButtonText: {
-    color: "#000",
+    color: "#fff",
     fontWeight: "600",
     fontSize: 14,
   },
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   loadingText: {
-    color: "#999",
+    color: "#7b6a53",
     fontSize: 16,
   },
   emptyContainer: {
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   emptyText: {
-    color: "#999",
+    color: "#7b6a53",
     fontSize: 16,
     textAlign: "center",
   },
@@ -286,9 +286,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     height: 70,
-    backgroundColor: "#222",
+    backgroundColor: "#fffdf8",
     borderTopWidth: 1,
-    borderTopColor: "#333",
+    borderTopColor: "#eadfca",
     position: "absolute",
     bottom: 0,
     left: 0,
@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
-    backgroundColor: "#f5a623",
+    backgroundColor: "#17324d",
     borderRadius: 20,
     marginVertical: 8,
     marginHorizontal: 8,

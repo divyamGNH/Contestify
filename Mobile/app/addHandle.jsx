@@ -48,7 +48,7 @@ const CodeforcesUsernamePage = () => {
     };
 
     fetchHandle();
-  }, []);
+  }, [authToken]);
 
   // 🔥 SUBMIT HANDLE
   const handleSubmit = async () => {
@@ -169,7 +169,7 @@ const CodeforcesUsernamePage = () => {
           >
             {isSubmitting ? (
               <View style={styles.buttonContent}>
-                <ActivityIndicator color="#1a1a1a" size="small" />
+                <ActivityIndicator color="#ffffff" size="small" />
                 <Text style={styles.submitButtonText}>Saving...</Text>
               </View>
             ) : (
@@ -185,7 +185,7 @@ const CodeforcesUsernamePage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1a1a',
+    backgroundColor: '#f5efe3',
   },
   flex: {
     flex: 1,
@@ -205,11 +205,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerSubtitle: {
-    color: '#999',
+    color: '#7b6a53',
     fontSize: 14,
   },
   headerTitle: {
-    color: '#FFA500',
+    color: '#17324d',
     fontSize: 28,
     fontWeight: 'bold',
     marginTop: 4,
@@ -217,10 +217,12 @@ const styles = StyleSheet.create({
   iconContainer: {
     width: 48,
     height: 48,
-    backgroundColor: '#2a2a2a',
+    backgroundColor: '#fffdf8',
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#eadfca',
   },
   iconText: {
     fontSize: 24,
@@ -231,12 +233,12 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#2a2a2a',
+    backgroundColor: '#fffdf8',
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 16,
     borderWidth: 1,
-    borderColor: '#444',
+    borderColor: '#eadfca',
   },
   platformIcon: {
     width: 24,
@@ -245,7 +247,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    color: '#fff',
+    color: '#17324d',
     fontSize: 16,
     padding: 0,
   },
@@ -259,7 +261,7 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   infoText: {
-    color: '#666',
+    color: '#7b6a53',
     fontSize: 14,
     lineHeight: 20,
   },
@@ -267,7 +269,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 12,
     padding: 20,
-    backgroundColor: '#1a1a1a',
+    backgroundColor: '#f5efe3',
   },
   button: {
     flex: 1,
@@ -277,7 +279,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cancelButton: {
-    backgroundColor: '#FF6B6B',
+    backgroundColor: '#ff7849',
   },
   cancelButtonText: {
     color: '#fff',
@@ -285,10 +287,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   submitButton: {
-    backgroundColor: '#A8E063',
+    backgroundColor: '#17324d',
   },
   submitButtonText: {
-    color: '#1a1a1a',
+    color: '#fff',
     fontSize: 16,
     fontWeight: '600',
   },
@@ -298,7 +300,7 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   buttonDisabled: {
-    backgroundColor: '#444',
+    backgroundColor: '#7b6a53',
     opacity: 0.6,
   },
 });

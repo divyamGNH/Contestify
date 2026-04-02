@@ -3,15 +3,15 @@ import { StyleSheet } from 'react-native';
 export const contestDiscoveryStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#f5efe3',
   },
   header: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#fffdf8',
     paddingTop: 50,
     paddingHorizontal: 20,
     paddingBottom: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: '#eadfca',
   },
   headerTop: {
     flexDirection: 'row',
@@ -22,13 +22,13 @@ export const contestDiscoveryStyles = StyleSheet.create({
   headerTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#17324d',
   },
   filterButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#f6efe1',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -38,7 +38,7 @@ export const contestDiscoveryStyles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#f6efe1',
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
@@ -51,7 +51,7 @@ export const contestDiscoveryStyles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontSize: 16,
-    color: '#111827',
+    color: '#17324d',
   },
   filtersContainer: {
     marginBottom: 16,
@@ -64,23 +64,23 @@ export const contestDiscoveryStyles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 20,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#f6efe1',
     marginRight: 8,
   },
   activeFilterChip: {
-    backgroundColor: '#2721ecff',
+    backgroundColor: '#17324d',
   },
   filterText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#6B7280',
+    color: '#7b6a53',
   },
   activeFilterText: {
     color: '#FFFFFF',
   },
   timeFiltersContainer: {
     flexDirection: 'row',
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#f6efe1',
     borderRadius: 8,
     padding: 4,
   },
@@ -91,8 +91,8 @@ export const contestDiscoveryStyles = StyleSheet.create({
     borderRadius: 6,
   },
   activeTimeFilterChip: {
-    backgroundColor: '#FFFFFF',
-    shadowColor: '#000',
+    backgroundColor: '#fffdf8',
+    shadowColor: '#7c5f3b',
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
@@ -100,10 +100,10 @@ export const contestDiscoveryStyles = StyleSheet.create({
   timeFilterText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#6B7280',
+    color: '#7b6a53',
   },
   activeTimeFilterText: {
-    color: '#2721ecff',
+    color: '#17324d',
   },
   contestList: {
     flex: 1,
@@ -113,18 +113,20 @@ export const contestDiscoveryStyles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#17324d',
     marginBottom: 16,
   },
   contestCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#fffdf8',
     borderRadius: 16,
     padding: 20,
     marginBottom: 16,
-    shadowColor: '#000',
+    shadowColor: '#7c5f3b',
     shadowOpacity: 0.05,
     shadowRadius: 10,
     elevation: 3,
+    borderWidth: 1,
+    borderColor: '#eadfca',
   },
   contestHeader: {
     flexDirection: 'row',
@@ -150,12 +152,12 @@ export const contestDiscoveryStyles = StyleSheet.create({
   contestTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#17324d',
     marginBottom: 2,
   },
   platformName: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#7b6a53',
   },
   liveTag: {
     backgroundColor: '#EF4444',
@@ -183,7 +185,7 @@ export const contestDiscoveryStyles = StyleSheet.create({
   },
   detailText: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#7b6a53',
   },
   contestActions: {
     alignItems: 'flex-start',
@@ -202,7 +204,7 @@ export const contestDiscoveryStyles = StyleSheet.create({
   reminderButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#3B82F6',
+    backgroundColor: '#0f766e',
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 8,
@@ -217,17 +219,17 @@ export const contestDiscoveryStyles = StyleSheet.create({
     fontWeight: '600',
   },
   viewMoreButton: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#fffdf8',
     paddingVertical: 16,
     borderRadius: 12,
     alignItems: 'center',
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: '#eadfca',
   },
   viewMoreText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#6B7280',
+    color: '#7b6a53',
   },
 });

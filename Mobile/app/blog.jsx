@@ -16,7 +16,61 @@ import BottomNav from '../components/BottomNav';
 
 const { width } = Dimensions.get('window');
 
-// Real News Data with actual articles and images
+class Category {
+  constructor(title) {
+    this.title = title;
+  }
+
+  getFormattedTitle() {
+    return this.title;
+  }
+}
+
+class TechCategory extends Category {
+  getFormattedTitle() {
+    return this.title;
+  }
+}
+
+class StartupCategory extends Category {
+  getFormattedTitle() {
+    return this.title;
+  }
+}
+
+class BusinessCategory extends Category {
+  getFormattedTitle() {
+    return this.title;
+  }
+}
+
+class NewsArticle {
+  constructor({ id, title, date, readTime, tag, image, url }) {
+    this.id = id;
+    this.title = title;
+    this.date = date;
+    this.readTime = readTime;
+    this.tag = tag;
+    this.image = image;
+    this.url = url;
+  }
+
+  getReadTime() {
+    return `⏱ ${this.readTime}`;
+  }
+
+  getDate() {
+    return `📅 ${this.date}`;
+  }
+}
+
+class NewsSection {
+  constructor(category, rawArticles) {
+    this.category = category;
+    this.articles = rawArticles.map(a => new NewsArticle(a));
+  }
+}
+
 const NEWS_DATA = {
   techNews: [
     {
@@ -108,15 +162,14 @@ const NEWS_DATA = {
 };
 
 const SECTIONS = [
-  { id: 'tech', title: 'Tech News', data: NEWS_DATA.techNews },
-  { id: 'startup', title: 'Startup Stories', data: NEWS_DATA.startupStories },
-  { id: 'business', title: 'Business', data: NEWS_DATA.business },
+  new NewsSection(new TechCategory(), NEWS_DATA.techNews),
+  new NewsSection(new StartupCategory(), NEWS_DATA.startupStories),
+  new NewsSection(new BusinessCategory(), NEWS_DATA.business),
 ];
 
-// News Card Component with clickable link
 const NewsCard = ({ item }) => {
   const handlePress = () => {
-    Linking.openURL(item.url).catch(err => 
+    Linking.openURL(item.url).catch(err =>
       console.error("Failed to open URL:", err)
     );
   };
@@ -127,19 +180,17 @@ const NewsCard = ({ item }) => {
       activeOpacity={0.9}
       onPress={handlePress}
     >
-      <Image 
-        source={{ uri: item.image }}
-        style={styles.cardImage}
-        resizeMode="cover"
-      />
+      <Image source={{ uri: item.image }} style={styles.cardImage} resizeMode="cover" />
+      
       <View style={styles.cardContent}>
         <Text style={styles.cardTitle} numberOfLines={3}>
           {item.title}
         </Text>
+
         <View style={styles.cardFooter}>
           <View style={styles.cardMeta}>
-            <Text style={styles.metaText}>⏱ {item.readTime}</Text>
-            <Text style={styles.metaText}>📅 {item.date}</Text>
+            <Text style={styles.metaText}>{item.getReadTime()}</Text>
+            <Text style={styles.metaText}>{item.getDate()}</Text>
           </View>
           <Text style={styles.tag}>{item.tag}</Text>
         </View>
@@ -148,12 +199,12 @@ const NewsCard = ({ item }) => {
   );
 };
 
-// Section Component
-const Section = ({ title, data }) => (
+const Section = ({ section }) => (
   <View style={styles.section}>
-    <Text style={styles.sectionTitle}>{title}</Text>
+    <Text style={styles.sectionTitle}>{section.category.getFormattedTitle()}</Text>
+
     <FlatList
-      data={data}
+      data={section.articles}
       renderItem={({ item }) => <NewsCard item={item} />}
       keyExtractor={(item) => item.id}
       horizontal
@@ -163,7 +214,6 @@ const Section = ({ title, data }) => (
   </View>
 );
 
-// Main App
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
@@ -173,8 +223,8 @@ export default function App() {
       </View>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        {SECTIONS.map((section) => (
-          <Section key={section.id} title={section.title} data={section.data} />
+        {SECTIONS.map((section, idx) => (
+          <Section key={idx} section={section} />
         ))}
       </ScrollView>
 
@@ -183,11 +233,10 @@ export default function App() {
   );
 }
 
-// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0A0A0A',
+    backgroundColor: '#f5efe3',
   },
   header: {
     paddingTop: 20,
@@ -195,12 +244,12 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   subtitle: {
-    color: '#8A8A8A',
+    color: '#7b6a53',
     fontSize: 14,
     marginBottom: 4,
   },
   title: {
-    color: '#F4C542',
+    color: '#17324d',
     fontSize: 26,
     fontWeight: '800',
   },
@@ -211,7 +260,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   sectionTitle: {
-    color: '#FFF',
+    color: '#17324d',
     fontSize: 20,
     fontWeight: '700',
     paddingHorizontal: 20,
@@ -226,12 +275,14 @@ const styles = StyleSheet.create({
     marginRight: 15,
     borderRadius: 12,
     overflow: 'hidden',
-    backgroundColor: '#1A1A1A',
+    backgroundColor: '#fffdf8',
+    borderWidth: 1,
+    borderColor: '#eadfca',
   },
   cardImage: {
     width: '100%',
     height: '70%',
-    backgroundColor: '#2A2A2A',
+    backgroundColor: '#f6efe1',
   },
   cardContent: {
     padding: 20,
@@ -239,7 +290,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   cardTitle: {
-    color: '#FFF',
+    color: '#17324d',
     fontSize: 16,
     fontWeight: '700',
     lineHeight: 22,
@@ -254,11 +305,11 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   metaText: {
-    color: '#8A8A8A',
+    color: '#7b6a53',
     fontSize: 12,
   },
   tag: {
-    color: '#F4C542',
+    color: '#0f766e',
     fontSize: 12,
     fontWeight: '600',
   },

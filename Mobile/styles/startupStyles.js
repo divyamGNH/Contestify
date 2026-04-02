@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const startupStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#2721ecff',
+    backgroundColor: '#17324d',
   },
   content: {
     flex: 1,
@@ -16,15 +16,15 @@ export const startupStyles = StyleSheet.create({
   logoText: {
     fontSize: 48,
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#fdf7ed',
     textAlign: 'center',
     letterSpacing: 2,
   },
   tagline: {
     fontSize: 16,
-    color: '#ffffffff',
+    color: '#dbe6f0',
     textAlign: 'center',
     marginTop: 20,
-    opacity: 0.8,
+    opacity: 0.9,
   },
 });

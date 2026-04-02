@@ -3,11 +3,11 @@ import { StyleSheet } from 'react-native';
 export const profileStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: '#f5efe3',
   },
   
   header: {
-    backgroundColor: '#6366F1',
+    backgroundColor: '#17324d',
     paddingTop: 20,
     paddingBottom: 20,
     paddingHorizontal: 20,
@@ -36,11 +36,11 @@ export const profileStyles = StyleSheet.create({
   },
   
   userCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#fffdf8',
     borderRadius: 16,
     marginTop: 16,
     overflow: 'hidden',
-    shadowColor: '#000',
+    shadowColor: '#7c5f3b',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -51,13 +51,13 @@ export const profileStyles = StyleSheet.create({
   },
   
   userTopSection: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#fffdf8',
     padding: 24,
     alignItems: 'center',
   },
   
   darkStatsSection: {
-    backgroundColor: '#1F2937',
+    backgroundColor: '#17324d',
     padding: 24,
   },
   
@@ -69,7 +69,7 @@ export const profileStyles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: '#6366F1',
+    backgroundColor: '#0f766e',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -83,13 +83,13 @@ export const profileStyles = StyleSheet.create({
   userName: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: '#17324d',
     marginBottom: 4,
   },
   
   userHandle: {
     fontSize: 16,
-    color: '#6B7280',
+    color: '#7b6a53',
     marginBottom: 24,
   },
   
@@ -131,23 +131,23 @@ export const profileStyles = StyleSheet.create({
   
   statLabelDark: {
     fontSize: 14,
-    color: '#9CA3AF',
+    color: '#d3dfeb',
     marginTop: 4,
   },
   
   statDividerDark: {
     width: 1,
     height: 40,
-    backgroundColor: '#374151',
+    backgroundColor: 'rgba(255,255,255,0.25)',
     marginHorizontal: 16,
   },
   
   sectionCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#fffdf8',
     borderRadius: 16,
     padding: 16,
     marginTop: 16,
-    shadowColor: '#000',
+    shadowColor: '#7c5f3b',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -155,12 +155,14 @@ export const profileStyles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
     elevation: 5,
+    borderWidth: 1,
+    borderColor: '#eadfca',
   },
   
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: '#17324d',
     marginBottom: 12,
   },
   
@@ -174,7 +176,7 @@ export const profileStyles = StyleSheet.create({
   
   settingItem: {
     width: '47%',
-    backgroundColor: '#1F2937',
+    backgroundColor: '#17324d',
     borderRadius: 16,
     padding: 20,
     minHeight: 90,
@@ -183,11 +185,11 @@ export const profileStyles = StyleSheet.create({
   },
   
   settingHighlight: {
-    backgroundColor: '#F59E0B',
+    backgroundColor: '#0f766e',
   },
   
   settingDanger: {
-    backgroundColor: '#EF4444',
+    backgroundColor: '#ff7849',
   },
   
   settingTitle: {
@@ -245,7 +247,7 @@ export const profileStyles = StyleSheet.create({
   
   achievementLabel: {
     fontSize: 12,
-    color: '#6B7280',
+    color: '#7b6a53',
     textAlign: 'center',
   },
   
@@ -257,7 +259,7 @@ export const profileStyles = StyleSheet.create({
   chartArea: {
     height: 80,
     position: 'relative',
-    backgroundColor: '#F8FAFC',
+    backgroundColor: '#f6efe1',
     borderRadius: 8,
     padding: 16,
   },
@@ -268,7 +270,7 @@ export const profileStyles = StyleSheet.create({
     left: 16,
     right: 16,
     height: 2,
-    backgroundColor: '#3B82F6',
+    backgroundColor: '#0f766e',
   },
   
   chartPoint: {
@@ -277,7 +279,7 @@ export const profileStyles = StyleSheet.create({
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: '#3B82F6',
+    backgroundColor: '#0f766e',
     borderWidth: 3,
     borderColor: '#FFFFFF',
   },
@@ -291,7 +293,7 @@ export const profileStyles = StyleSheet.create({
   
   chartLabel: {
     fontSize: 12,
-    color: '#6B7280',
+    color: '#7b6a53',
   },
   
   performanceStats: {
@@ -306,12 +308,12 @@ export const profileStyles = StyleSheet.create({
   performanceValue: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: '#17324d',
   },
   
   performanceLabel: {
     fontSize: 12,
-    color: '#6B7280',
+    color: '#7b6a53',
     marginTop: 4,
   },
   
@@ -326,19 +328,19 @@ export const profileStyles = StyleSheet.create({
   progressValue: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1F2937',
+    color: '#17324d',
     marginBottom: 4,
   },
   
   progressCount: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#7b6a53',
     marginBottom: 8,
   },
   
   progressBar: {
     height: 6,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: '#eadfca',
     borderRadius: 3,
     overflow: 'hidden',
   },
@@ -356,7 +358,7 @@ export const profileStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: '#f6efe1',
     borderRadius: 12,
     marginBottom: 8,
   },
@@ -383,18 +385,18 @@ export const profileStyles = StyleSheet.create({
   platformName: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1F2937',
+    color: '#17324d',
     marginBottom: 4,
   },
   
   platformProgress: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#7b6a53',
   },
   
   platformArrow: {
     fontSize: 18,
-    color: '#6B7280',
+    color: '#7b6a53',
   },
   
   topicsGrid: {
@@ -429,7 +431,7 @@ export const profileStyles = StyleSheet.create({
   
   streakLabel: {
     fontSize: 16,
-    color: '#6B7280',
+    color: '#7b6a53',
     marginBottom: 16,
   },
   
@@ -442,7 +444,7 @@ export const profileStyles = StyleSheet.create({
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: '#eadfca',
   },
   
   streakDotActive: {

@@ -121,7 +121,7 @@ export default YourContest;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1a1a1a",
+    backgroundColor: "#f5efe3",
   },
   header: {
     flexDirection: "row",
@@ -132,12 +132,12 @@ const styles = StyleSheet.create({
   },
   subHeading: {
     fontSize: 14,
-    color: "#999",
+    color: "#7b6a53",
   },
   heading: {
     fontSize: 28,
     fontWeight: "bold",
-    color: "#f5a623",
+    color: "#17324d",
   },
   listContainer: {
     paddingHorizontal: 20,
@@ -146,10 +146,12 @@ const styles = StyleSheet.create({
   platformCard: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#2a2a2a",
+    backgroundColor: "#fffdf8",
     padding: 16,
     borderRadius: 12,
     marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#eadfca",
   },
   icon: {
     width: 48,
@@ -162,16 +164,16 @@ const styles = StyleSheet.create({
   },
   platformName: {
     fontSize: 16,
-    color: "#fff",
-    fontWeight: "600",
+    color: "#17324d",
+    fontWeight: "700",
   },
   platformShort: {
     fontSize: 14,
-    color: "#aaa",
+    color: "#7b6a53",
     marginTop: 4,
   },
   removeButton: {
-    backgroundColor: "#f44336",
+    backgroundColor: "#ff7849",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 8,
@@ -187,7 +189,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   noData: {
-    color: "#aaa",
+    color: "#7b6a53",
     fontSize: 16,
   },
 });

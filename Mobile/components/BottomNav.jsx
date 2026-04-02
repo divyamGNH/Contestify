@@ -28,6 +28,13 @@ const tabs = [
       <Ionicons name="settings" size={26} color={color} />
     ),
   },
+  {
+    name: "chat",
+    route: "/chat",
+    icon: ({ color }) => (
+      <Ionicons name="chatbubble-ellipses-outline" size={24} color={color} />
+    ),
+  },
 
   //add more tabs here if needed
 ];
@@ -47,7 +54,7 @@ const BottomNav = () => {
             style={[styles.navItem, isActive && styles.navItemActive]}
             onPress={() => router.replace(tab.route)}
           >
-            {tab.icon({ color: isActive ? "black" : "white" })}
+            {tab.icon({ color: isActive ? "white" : "#8b7355" })}
           </TouchableOpacity>
         );
       })}
@@ -61,9 +68,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     height: 70,
-    backgroundColor: "#222",
+    backgroundColor: "#fffdf8",
     borderTopWidth: 1,
-    borderTopColor: "#333",
+    borderTopColor: "#eadfca",
   },
   navItem: {
     flex: 1,
@@ -72,7 +79,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   navItemActive: {
-    backgroundColor: "#f5a623",
+    backgroundColor: "#17324d",
     borderRadius: 20,
     marginVertical: 8,
     marginHorizontal: 8,

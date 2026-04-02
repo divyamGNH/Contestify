@@ -1,6 +1,6 @@
-import {create} from "zustand";
+import { create } from "zustand";
 import axios from "axios";
-import Constants from 'expo-constants';
+import Constants from "expo-constants";
 
 const { IP } = Constants.expoConfig.extra;
 
@@ -8,9 +8,8 @@ const useUserStore = create((set) => ({
   user: null,
   loading: false,
   error: null,
-  authToken : null,
+  authToken: null,
 
-  // Fetch username from backend
   getUsername: async (token) => {
     set({ loading: true, error: null });
 
@@ -21,15 +20,16 @@ const useUserStore = create((set) => ({
         },
       });
 
-      // Update store with fetched user info
-      set({ user: res.data, loading: false, authToken:token });
+      set({ user: res.data, loading: false, authToken: token });
     } catch (error) {
-      console.error("Error fetching username:", error);
-      set({ error: error.response?.data?.message || error.message, loading: false });
+      set({
+        error: error.response?.data?.message || error.message,
+        loading: false,
+      });
     }
   },
 
-  logout: () => set({ user: null }), // optional logout
+  logout: () => set({ user: null, authToken: null }),
 }));
 
 export default useUserStore;

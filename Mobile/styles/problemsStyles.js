@@ -3,20 +3,20 @@ import { StyleSheet } from 'react-native';
 export const problemsStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#f5efe3',
   },
   header: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#fffdf8',
     paddingTop: 50,
     paddingHorizontal: 20,
     paddingBottom: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: '#eadfca',
   },
   headerTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#6B7280',
+    color: '#7b6a53',
     textAlign: 'center',
     marginBottom: 20,
     letterSpacing: 1,
@@ -28,12 +28,12 @@ export const problemsStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#f6efe1',
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: '#eadfca',
   },
   filterIcon: {
     fontSize: 16,
@@ -43,36 +43,36 @@ export const problemsStyles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     fontWeight: '600',
-    color: '#111827',
+    color: '#17324d',
   },
   dropdownIcon: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#7b6a53',
     marginRight: 8,
   },
   sortIcon: {
     fontSize: 16,
-    color: '#6B7280',
+    color: '#7b6a53',
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F9FAFB',
+    backgroundColor: '#f6efe1',
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: '#eadfca',
   },
   searchIcon: {
     fontSize: 16,
     marginRight: 8,
-    color: '#6B7280',
+    color: '#7b6a53',
   },
   searchInput: {
     flex: 1,
     fontSize: 16,
-    color: '#111827',
+    color: '#17324d',
   },
   problemsList: {
     flex: 1,
@@ -80,16 +80,16 @@ export const problemsStyles = StyleSheet.create({
     paddingTop: 20,
   },
   problemCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#fffdf8',
     borderRadius: 16,
     padding: 20,
     marginBottom: 16,
-    shadowColor: '#000',
+    shadowColor: '#7c5f3b',
     shadowOpacity: 0.05,
     shadowRadius: 10,
     elevation: 3,
     borderWidth: 1,
-    borderColor: '#F3F4F6',
+    borderColor: '#eadfca',
   },
   problemHeader: {
     flexDirection: 'row',
@@ -100,7 +100,7 @@ export const problemsStyles = StyleSheet.create({
   problemTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#17324d',
     flex: 1,
     marginRight: 12,
   },
@@ -112,7 +112,7 @@ export const problemsStyles = StyleSheet.create({
   completionText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#6B7280',
+    color: '#7b6a53',
   },
   completionIcon: {
     width: 20,
@@ -128,7 +128,7 @@ export const problemsStyles = StyleSheet.create({
     height: 16,
     borderRadius: 8,
     borderWidth: 2,
-    borderColor: '#D1D5DB',
+    borderColor: '#c7b99f',
   },
   problemMeta: {
     flexDirection: 'row',
@@ -148,7 +148,7 @@ export const problemsStyles = StyleSheet.create({
   },
   platformText: {
     fontSize: 14,
-    color: '#6B7280',
+    color: '#7b6a53',
     fontWeight: '500',
   },
   topicsContainer: {
@@ -157,14 +157,14 @@ export const problemsStyles = StyleSheet.create({
     gap: 8,
   },
   topicTag: {
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#f6efe1',
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 6,
   },
   topicText: {
     fontSize: 12,
-    color: '#6B7280',
+    color: '#7b6a53',
     fontWeight: '500',
   },
 });
