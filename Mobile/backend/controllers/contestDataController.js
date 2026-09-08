@@ -116,6 +116,71 @@ export const getPersonalPlatforms = async (req, res) => {
   }
 };
 
-// export const getPersonalLiveContests = async(req,res)=>{
-  
-// }
+export const getPersonalizedContests = async (req, res) => {
+  const userId = req.user.userId;
+
+  try {
+    const user = await User.findById(userId, "selectedPlatforms");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const now = new Date();
+    const nextWeek = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+
+    const response = await axios.get("https://clist.by/api/v4/contest/", {
+      params: {
+        username: process.env.CLIST_USERNAME,
+        api_key: process.env.CLIST_API_KEY,
+        start__gt: now.toISOString(),
+        start__lt: nextWeek.toISOString(),
+        order_by: "start",
+      },
+    });
+
+    const allContests = response.data.objects.map((c) => ({
+      id: c.id,
+      event: c.event,
+      host: c.host,
+      platform: c.resource,
+      start: c.start,
+      end: c.end,
+      href: c.href,
+    }));
+
+    const selectedPlatforms = user.selectedPlatforms || [];
+    const filteredContests = allContests.filter((contest) => {
+      if (selectedPlatforms.length === 0) return true;
+      return selectedPlatforms.some((sp) => {
+        const platformName = typeof sp === "string" ? sp : sp.name || "";
+        return contest.platform.toLowerCase().includes(platformName.toLowerCase());
+      });
+    });
+
+    const live = filteredContests.filter((c) => {
+      const start = new Date(c.start);
+      const end = c.end ? new Date(c.end) : null;
+      return start <= now && (!end || now <= end);
+    });
+
+    const today = filteredContests.filter((c) => {
+      const start = new Date(c.start);
+      return (
+        start.getFullYear() === now.getFullYear() &&
+        start.getMonth() === now.getMonth() &&
+        start.getDate() === now.getDate()
+      );
+    });
+
+    res.json({
+      selectedPlatforms,
+      live,
+      today,
+      week: filteredContests,
+    });
+  } catch (error) {
+    console.error("Error fetching personalized contests:", error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
